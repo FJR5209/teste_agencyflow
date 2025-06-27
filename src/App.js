@@ -236,7 +236,7 @@ const LoginPage = ({ onLogin }) => {
   );
 };
 
-// Sidebar adaptada para permissões e links extras
+// Sidebar adaptada para permissões
 const Sidebar = ({ activePage, setActivePage, onLogout, user, sidebarOpen, setSidebarOpen }) => {
   const canViewDashboard = hasPermission(user.role, PERMISSIONS.VIEW_DASHBOARD);
   const canViewProjects = hasPermission(user.role, PERMISSIONS.VIEW_PROJECTS);
@@ -260,13 +260,16 @@ const Sidebar = ({ activePage, setActivePage, onLogout, user, sidebarOpen, setSi
 
   return (
     <>
+      {/* Overlay para fechar o menu em telas pequenas */}
       {sidebarOpen && (
         <div 
           className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
           onClick={() => setSidebarOpen(false)}
         />
       )}
-      <div className={`fixed top-0 left-0 h-screen bg-gray-900 border-r border-gray-800 z-50 transition-all duration-300 ease-in-out ${
+      
+      {/* Sidebar */}
+      <div className={`fixed top-0 left-0 h-full bg-gray-900 border-r border-gray-800 z-50 transition-all duration-300 ease-in-out ${
         sidebarOpen ? 'w-64 translate-x-0' : 'w-16 -translate-x-0'
       } lg:relative lg:translate-x-0`}>
         <div className="flex flex-col h-full">
@@ -287,8 +290,8 @@ const Sidebar = ({ activePage, setActivePage, onLogout, user, sidebarOpen, setSi
             </div>
           </div>
 
-          {/* Menu Items + Extras juntos */}
-          <nav className="flex-1 flex flex-col p-4 space-y-2 overflow-y-auto">
+          {/* Menu Items */}
+          <nav className="flex-1 p-4 space-y-2">
             {menuItems.filter(item => item.permission).map((item) => (
               <button
                 key={item.id}
@@ -306,7 +309,7 @@ const Sidebar = ({ activePage, setActivePage, onLogout, user, sidebarOpen, setSi
           </nav>
 
           {/* Footer do Sidebar */}
-          <div className="p-4 border-t border-gray-800 mt-auto">
+          <div className="p-4 border-t border-gray-800">
             <div className={`flex items-center ${sidebarOpen ? 'justify-between' : 'justify-center'}`}>
               {sidebarOpen && (
                 <div className="flex items-center">
@@ -2845,13 +2848,16 @@ const ProductsPage = ({ user }) => {
   );
 };
 
+// Componente Principal App
 function App() {
+  // Simulação de login: sempre loga como Ana Souza (admin)
   const [isAuthenticated, setIsAuthenticated] = useState(true);
   const [activePage, setActivePage] = useState('Dashboard');
   const [user, setUser] = useState(USERS_DATA[0]);
   const [sidebarOpen, setSidebarOpen] = useState(window.innerWidth >= 1024); // Aberto em telas grandes, fechado em pequenas
 
   const handleLogin = (credentials) => {
+    // Aqui você pode implementar lógica real de autenticação
     setUser(USERS_DATA[0]); // Sempre Ana Souza (admin)
     setIsAuthenticated(true);
   };
@@ -2886,24 +2892,18 @@ function App() {
     }
   };
 
+  if (!isAuthenticated) {
+    return <LoginPage onLogin={handleLogin} />;
+  }
+
   return (
-    <div className="flex min-h-screen bg-gray-950">
-      <Sidebar
-        activePage={activePage}
-        setActivePage={setActivePage}
-        onLogout={handleLogout}
-        user={user}
-        sidebarOpen={sidebarOpen}
-        setSidebarOpen={setSidebarOpen}
-      />
-      <div className="flex-1 flex flex-col">
+    <div className="flex h-screen bg-gray-950">
+      <Sidebar activePage={activePage} setActivePage={setActivePage} onLogout={handleLogout} user={user} sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+      <div className="flex-1 lg:ml-0">
         <Header activePage={activePage} sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-        {/* Renderizar o app normalmente se não estiver visualizando HTML externo */}
-        {view === null && (
-          <main className="h-full overflow-auto">
-            {renderPage()}
-          </main>
-        )}
+        <main className="h-full overflow-auto">
+          {renderPage()}
+        </main>
       </div>
     </div>
   );
