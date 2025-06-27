@@ -236,21 +236,8 @@ const LoginPage = ({ onLogin }) => {
   );
 };
 
-const DocumentationIcon = () => (
-  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 8h10M7 12h6m-6 4h10M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-  </svg>
-);
-
-const DiagramIcon = () => (
-  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <circle cx="12" cy="12" r="10" strokeWidth={2} />
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6l4 2" />
-  </svg>
-);
-
 // Sidebar adaptada para permissões e links extras
-const Sidebar = ({ activePage, setActivePage, onLogout, user, sidebarOpen, setSidebarOpen, onOpenDoc, onOpenDiagram }) => {
+const Sidebar = ({ activePage, setActivePage, onLogout, user, sidebarOpen, setSidebarOpen }) => {
   const canViewDashboard = hasPermission(user.role, PERMISSIONS.VIEW_DASHBOARD);
   const canViewProjects = hasPermission(user.role, PERMISSIONS.VIEW_PROJECTS);
   const canViewClients = hasPermission(user.role, PERMISSIONS.VIEW_CLIENTS);
@@ -269,12 +256,6 @@ const Sidebar = ({ activePage, setActivePage, onLogout, user, sidebarOpen, setSi
     { id: 'Relatórios', label: 'Relatórios', icon: ReportsIcon, permission: canViewReports },
     { id: 'Jobs', label: 'Jobs', icon: JobsIcon, permission: canViewJobs },
     { id: 'Configurações', label: 'Configurações', icon: SettingsIcon, permission: canViewSettings },
-  ];
-
-  // Itens extras (sempre visíveis)
-  const extraItems = [
-    { id: 'Documentacao', label: 'Documentação', icon: DocumentationIcon, onClick: onOpenDoc },
-    { id: 'Diagrama', label: 'Diagrama', icon: DiagramIcon, onClick: onOpenDiagram },
   ];
 
   return (
@@ -317,17 +298,6 @@ const Sidebar = ({ activePage, setActivePage, onLogout, user, sidebarOpen, setSi
                     ? 'bg-blue-600 text-white'
                     : 'text-gray-300 hover:bg-gray-800'
                 }`}
-              >
-                <item.icon />
-                {sidebarOpen && <span className="ml-3">{item.label}</span>}
-              </button>
-            ))}
-            {/* Itens extras */}
-            {extraItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={item.onClick}
-                className={`w-full flex items-center px-3 py-2 rounded-lg transition-colors text-gray-300 hover:bg-gray-800`}
               >
                 <item.icon />
                 {sidebarOpen && <span className="ml-3">{item.label}</span>}
@@ -2875,20 +2845,7 @@ const ProductsPage = ({ user }) => {
   );
 };
 
-function HtmlViewer({ src }) {
-  return (
-    <div style={{ width: '100vw', height: '100vh', background: '#111' }}>
-      <iframe
-        src={src}
-        title="Visualização HTML"
-        style={{ width: '100vw', height: '100vh', border: 'none', display: 'block' }}
-      />
-    </div>
-  );
-}
-
 function App() {
-  const [view, setView] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(true);
   const [activePage, setActivePage] = useState('Dashboard');
   const [user, setUser] = useState(USERS_DATA[0]);
@@ -2938,18 +2895,9 @@ function App() {
         user={user}
         sidebarOpen={sidebarOpen}
         setSidebarOpen={setSidebarOpen}
-        onOpenDoc={() => setView('documentacao')}
-        onOpenDiagram={() => setView('diagrama')}
       />
       <div className="flex-1 flex flex-col">
         <Header activePage={activePage} sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-        {/* Renderização condicional do HtmlViewer */}
-        {view === 'documentacao' && (
-          <HtmlViewer src="/documentacao.html" onBack={() => setView(null)} />
-        )}
-        {view === 'diagrama' && (
-          <HtmlViewer src="/diagrama.html" onBack={() => setView(null)} />
-        )}
         {/* Renderizar o app normalmente se não estiver visualizando HTML externo */}
         {view === null && (
           <main className="h-full overflow-auto">
