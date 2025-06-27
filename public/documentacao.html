@@ -1,0 +1,1670 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentação AgencyFlow - Sistema de Gestão para Agências</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .nav {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+        }
+
+        .nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: #667eea;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .nav a:hover, .nav a.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .section h2 {
+            color: #667eea;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .section h3 {
+            color: #555;
+            font-size: 1.4rem;
+            margin: 25px 0 15px 0;
+        }
+
+        .section h4 {
+            color: #666;
+            font-size: 1.2rem;
+            margin: 20px 0 10px 0;
+        }
+
+        .code-block {
+            background: #f4f4f4;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        .highlight {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .card {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .card h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        .table th, .table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .table th {
+            background: #667eea;
+            color: white;
+        }
+
+        .table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin: 2px;
+        }
+
+        .badge-primary { background: #667eea; color: white; }
+        .badge-success { background: #28a745; color: white; }
+        .badge-warning { background: #ffc107; color: black; }
+        .badge-danger { background: #dc3545; color: white; }
+        .badge-info { background: #17a2b8; color: white; }
+
+        .checklist {
+            list-style: none;
+        }
+
+        .checklist li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .checklist li:before {
+            content: "☐";
+            margin-right: 10px;
+            color: #667eea;
+        }
+
+        .checklist li.completed:before {
+            content: "☑";
+            color: #28a745;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-to-top:hover {
+            background: #5a6fd8;
+            transform: scale(1.1);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #e9ecef;
+            border-radius: 3px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #a866ea, #aa56ff);
+            transition: width 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+
+        .copy-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            margin-left: 10px;
+        }
+
+        .copy-btn:hover {
+            background: #5a6fd8;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🚀 AgencyFlow</h1>
+        <p>Sistema de Gestão Completo para Agências de Marketing e Publicidade</p>
+    </div>
+
+    <div class="container">
+        <nav class="nav">
+            <ul>
+                <li><a href="#visao-geral" onclick="scrollToSection('visao-geral')">Visão Geral</a></li>
+                <li><a href="#arquitetura" onclick="scrollToSection('arquitetura')">Arquitetura</a></li>
+                <li><a href="#usuarios" onclick="scrollToSection('usuarios')">Usuários</a></li>
+                <li><a href="#modulos" onclick="scrollToSection('modulos')">Módulos</a></li>
+                <li><a href="#interface" onclick="scrollToSection('interface')">Interface</a></li>
+                <li><a href="#backend" onclick="scrollToSection('backend')">Backend</a></li>
+                <li><a href="#frontend" onclick="scrollToSection('frontend')">Frontend</a></li>
+                <li><a href="#checklist" onclick="scrollToSection('checklist')">Checklist</a></li>
+            </ul>
+        </nav>
+
+        <section id="visao-geral" class="section">
+            <h2>🎯 Visão Geral do Projeto</h2>
+            <p>O <strong>AgencyFlow</strong> é um sistema de gestão completo para agências de marketing e publicidade, desenvolvido em React com Tailwind CSS. O sistema oferece controle total sobre projetos, clientes, orçamentos, contratos, jobs e usuários, com sistema de permissões granular.</p>
+            
+            <div class="highlight">
+                <h4>📊 Estatísticas do Projeto</h4>
+                <ul>
+                    <li><strong>Linhas de código:</strong> ~3.000 linhas</li>
+                    <li><strong>Componentes:</strong> 10+ componentes principais</li>
+                    <li><strong>Módulos:</strong> 9 módulos funcionais</li>
+                    <li><strong>Permissões:</strong> 20+ permissões granulares</li>
+                    <li><strong>Dados mock:</strong> 25+ entidades de exemplo</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="arquitetura" class="section">
+            <h2>🏗️ Arquitetura Atual</h2>
+            
+            <h3>Stack Tecnológica Definida</h3>
+            <div class="grid">
+                <div class="card">
+                    <h4>Frontend</h4>
+                    <p><strong>React 18+</strong> com hooks modernos</p>
+                </div>
+                <div class="card">
+                    <h4>Backend</h4>
+                    <p><strong>Node.js + Express</strong></p>
+                </div>
+                <div class="card">
+                    <h4>Banco de Dados</h4>
+                    <p><strong>Supabase</strong> (PostgreSQL)</p>
+                </div>
+                <div class="card">
+                    <h4>Storage</h4>
+                    <p><strong>Wasabi</strong> para arquivos</p>
+                </div>
+                <div class="card">
+                    <h4>Styling</h4>
+                    <p>Tailwind CSS para design responsivo</p>
+                </div>
+                <div class="card">
+                    <h4>Estado</h4>
+                    <p>useState para gerenciamento local</p>
+                </div>
+            </div>
+
+            <h3>Estrutura de Arquivos</h3>
+            <div class="code-block">
+src/
+├── App.js (2.912 linhas - componente principal)
+├── permissions.js (457 linhas - permissões e dados mock)
+├── index.js
+└── index.css
+            </div>
+
+            <h3>Vantagens da Stack Escolhida</h3>
+            <div class="grid">
+                <div class="card">
+                    <h4>Node.js + Express</h4>
+                    <ul>
+                        <li>JavaScript full-stack</li>
+                        <li>Ecossistema rico</li>
+                        <li>Performance alta</li>
+                        <li>Fácil deploy</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>Supabase</h4>
+                    <ul>
+                        <li>PostgreSQL gerenciado</li>
+                        <li>Auth integrado</li>
+                        <li>Real-time subscriptions</li>
+                        <li>API automática</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>Wasabi</h4>
+                    <ul>
+                        <li>Storage S3-compatible</li>
+                        <li>Baixo custo</li>
+                        <li>Alta performance</li>
+                        <li>Backup automático</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="usuarios" class="section">
+            <h2>👥 Sistema de Usuários e Permissões</h2>
+            
+            <h3>Papéis (Roles)</h3>
+            <div class="grid">
+                <div class="card">
+                    <h4><span class="badge badge-primary">Admin</span></h4>
+                    <p>Acesso total ao sistema</p>
+                </div>
+                <div class="card">
+                    <h4><span class="badge badge-success">Manager</span></h4>
+                    <p>Gestão de projetos e clientes</p>
+                </div>
+                <div class="card">
+                    <h4><span class="badge badge-info">Designer</span></h4>
+                    <p>Visualização e edição de projetos</p>
+                </div>
+                <div class="card">
+                    <h4><span class="badge badge-warning">Motion</span></h4>
+                    <p>Especialista em animação</p>
+                </div>
+                <div class="card">
+                    <h4><span class="badge badge-warning">Videomaker</span></h4>
+                    <p>Especialista em vídeo</p>
+                </div>
+                <div class="card">
+                    <h4><span class="badge badge-warning">Fotógrafo</span></h4>
+                    <p>Especialista em fotografia</p>
+                </div>
+                <div class="card">
+                    <h4><span class="badge badge-danger">Client</span></h4>
+                    <p>Acesso limitado a projetos próprios</p>
+                </div>
+            </div>
+
+            <h3>Permissões Granulares</h3>
+            <div class="code-block">
+// Principais permissões implementadas
+VIEW_DASHBOARD, CREATE_PROJECTS, EDIT_PROJECTS, DELETE_PROJECTS
+VIEW_CLIENTS, CREATE_CLIENTS, EDIT_CLIENTS, DELETE_CLIENTS
+VIEW_USERS, CREATE_USERS, EDIT_USERS, DELETE_USERS
+VIEW_JOBS, CREATE_JOBS, EDIT_JOBS, DELETE_JOBS, ASSIGN_JOBS
+CREATE_QUOTES, VIEW_QUOTES, EDIT_QUOTES, APPROVE_QUOTES
+CREATE_CONTRACTS, VIEW_CONTRACTS, EDIT_CONTRACTS
+MANAGE_PRODUCTS, MANAGE_CONTRACT_TEMPLATES
+            </div>
+        </section>
+
+        <section id="modulos" class="section">
+            <h2>📋 Módulos Principais</h2>
+            
+            <h3>1. DASHBOARD</h3>
+            <div class="card">
+                <h4>Funcionalidades:</h4>
+                <ul>
+                    <li>Cards de estatísticas (clientes, projetos, jobs)</li>
+                    <li>Gráfico de projetos por status</li>
+                    <li>Projetos ativos em destaque</li>
+                    <li>Resumo por empresa/cliente</li>
+                    <li>Jobs concluídos, em produção e a produzir</li>
+                </ul>
+            </div>
+
+            <h3>2. PROJETOS</h3>
+            <div class="card">
+                <h4>Funcionalidades:</h4>
+                <ul>
+                    <li>CRUD completo de projetos</li>
+                    <li>Tipos: Logo, Vídeo, Foto, Event Coverage, Social Media, Web</li>
+                    <li>Status: Novo, Em andamento, Finalizado</li>
+                    <li>Atribuição de responsáveis</li>
+                    <li>Upload de anexos (roteiros, referências)</li>
+                    <li>Formulários específicos por tipo</li>
+                </ul>
+            </div>
+
+            <h4>Tipos de Projeto:</h4>
+            <div class="grid">
+                <div class="card">
+                    <h4>Logo</h4>
+                    <p>Brand guidelines, paleta de cores, preferências</p>
+                </div>
+                <div class="card">
+                    <h4>Vídeo</h4>
+                    <p>Tipos específicos (VT, Cobertura, Institucional, etc.)</p>
+                </div>
+                <div class="card">
+                    <h4>Foto</h4>
+                    <p>Tipos específicos (Still, Produto, Ambiente, etc.)</p>
+                </div>
+                <div class="card">
+                    <h4>Event Coverage</h4>
+                    <p>Detalhes do evento, tipo de cobertura</p>
+                </div>
+                <div class="card">
+                    <h4>Social Media</h4>
+                    <p>Gestão de redes sociais</p>
+                </div>
+                <div class="card">
+                    <h4>Web</h4>
+                    <p>Desenvolvimento de sites</p>
+                </div>
+            </div>
+
+            <h3>3. CLIENTES</h3>
+            <div class="card">
+                <h4>Funcionalidades:</h4>
+                <ul>
+                    <li>CRUD completo de clientes</li>
+                    <li>Informações de contato</li>
+                    <li>Status ativo/inativo</li>
+                    <li>Histórico de projetos</li>
+                    <li>Receita total por cliente</li>
+                    <li>Gerente responsável</li>
+                </ul>
+            </div>
+
+            <h3>4. ORÇAMENTOS</h3>
+            <div class="card">
+                <h4>Funcionalidades:</h4>
+                <ul>
+                    <li>Criação de orçamentos com produtos</li>
+                    <li>Preços personalizados por cliente</li>
+                    <li>Sistema de aprovação</li>
+                    <li>Exportação PDF</li>
+                    <li>Validade configurável</li>
+                    <li>Observações e notas</li>
+                </ul>
+            </div>
+
+            <h4>Produtos Disponíveis:</h4>
+            <div class="grid">
+                <div class="card">
+                    <h4>Identidade Visual Completa</h4>
+                    <p>Logo, cores, tipografia e aplicações</p>
+                </div>
+                <div class="card">
+                    <h4>Campanha Digital</h4>
+                    <p>Gestão de redes sociais por 30 dias</p>
+                </div>
+                <div class="card">
+                    <h4>Vídeo Institucional</h4>
+                    <p>Vídeo de 2-3 minutos com roteiro e produção</p>
+                </div>
+                <div class="card">
+                    <h4>Fotografia de Produto</h4>
+                    <p>Sessão fotográfica com 20 fotos editadas</p>
+                </div>
+                <div class="card">
+                    <h4>Site Institucional</h4>
+                    <p>Site responsivo com até 10 páginas</p>
+                </div>
+                <div class="card">
+                    <h4>Gestão de Google Ads</h4>
+                    <p>Campanha Google Ads com relatórios mensais</p>
+                </div>
+            </div>
+
+            <h3>5. CONTRATOS</h3>
+            <div class="card">
+                <h4>Funcionalidades:</h4>
+                <ul>
+                    <li>Dois tipos: Serviço Único ou Contrato por Período</li>
+                    <li>Cláusulas pré-estabelecidas editáveis</li>
+                    <li>Adição/remoção de cláusulas customizadas</li>
+                    <li>Exportação PDF profissional</li>
+                    <li>Datas de início e fim</li>
+                    <li>Espaços para assinaturas</li>
+                </ul>
+            </div>
+
+            <h4>Cláusulas Padrão:</h4>
+            <div class="grid">
+                <div class="card">
+                    <h4>Objeto do Contrato</h4>
+                    <p>Descrição dos serviços a serem prestados</p>
+                </div>
+                <div class="card">
+                    <h4>Prazo de Execução</h4>
+                    <p>Definição dos prazos para entrega</p>
+                </div>
+                <div class="card">
+                    <h4>Forma de Pagamento</h4>
+                    <p>Condições e parcelamento</p>
+                </div>
+                <div class="card">
+                    <h4>Revisões</h4>
+                    <p>Número de revisões incluídas</p>
+                </div>
+                <div class="card">
+                    <h4>Confidencialidade</h4>
+                    <p>Acordo de sigilo</p>
+                </div>
+                <div class="card">
+                    <h4>Rescisão</h4>
+                    <p>Condições para cancelamento</p>
+                </div>
+            </div>
+
+            <h3>6. JOBS (KANBAN)</h3>
+            <div class="card">
+                <h4>Funcionalidades:</h4>
+                <ul>
+                    <li>CRUD completo de jobs</li>
+                    <li>Tipos: Design, Vídeo, Foto, Motion, Web</li>
+                    <li>Status: Novo, Em andamento, Pausado, Concluído</li>
+                    <li>Atribuição de responsáveis</li>
+                    <li>Auto-atribuição</li>
+                    <li>Upload de anexos</li>
+                    <li>Equipe de trabalho</li>
+                </ul>
+            </div>
+
+            <h3>7. USUÁRIOS</h3>
+            <div class="card">
+                <h4>Funcionalidades:</h4>
+                <ul>
+                    <li>Gestão completa de usuários</li>
+                    <li>Atribuição de papéis</li>
+                    <li>Status ativo/inativo</li>
+                    <li>Histórico de login</li>
+                    <li>Permissões granulares</li>
+                </ul>
+            </div>
+
+            <h3>8. RELATÓRIOS</h3>
+            <div class="card">
+                <h4>Funcionalidades:</h4>
+                <ul>
+                    <li>Relatório de Projetos</li>
+                    <li>Relatório de Clientes</li>
+                    <li>Relatório de Usuários</li>
+                    <li>Relatório de Produtividade</li>
+                    <li>Exportação de dados</li>
+                </ul>
+            </div>
+
+            <h3>9. CONFIGURAÇÕES</h3>
+            <div class="card">
+                <h4>Funcionalidades:</h4>
+                <ul>
+                    <li>Perfil do usuário</li>
+                    <li>Segurança (alteração de senha)</li>
+                    <li>Notificações</li>
+                    <li>Configurações do sistema</li>
+                    <li>Gerenciamento de produtos (admin)</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="interface" class="section">
+            <h2>🎨 Interface e UX</h2>
+            
+            <h3>Design System</h3>
+            <div class="grid">
+                <div class="card">
+                    <h4>Tema</h4>
+                    <p>Dark mode</p>
+                </div>
+                <div class="card">
+                    <h4>Cores</h4>
+                    <p>Gray-950 (background), Gray-900 (cards), Blue-600 (accent)</p>
+                </div>
+                <div class="card">
+                    <h4>Tipografia</h4>
+                    <p>Inter/Sans-serif</p>
+                </div>
+                <div class="card">
+                    <h4>Componentes</h4>
+                    <p>Cards, modais, tabelas, formulários</p>
+                </div>
+            </div>
+
+            <h3>Menu Lateral (Sidebar)</h3>
+            <div class="card">
+                <h4>Características:</h4>
+                <ul>
+                    <li><strong>Tipo:</strong> Menu sanduíche responsivo</li>
+                    <li><strong>Desktop:</strong> Fixo, pode ser recolhido (64px)</li>
+                    <li><strong>Mobile:</strong> Overlay</li>
+                    <li><strong>Transições:</strong> 300ms suaves</li>
+                    <li><strong>Overlay:</strong> Em telas pequenas</li>
+                </ul>
+            </div>
+
+            <h3>Responsividade</h3>
+            <div class="card">
+                <h4>Características:</h4>
+                <ul>
+                    <li><strong>Mobile-first:</strong> Design adaptativo</li>
+                    <li><strong>Breakpoints:</strong> Tailwind CSS padrão</li>
+                    <li><strong>Tabelas:</strong> Responsivas sem scroll lateral</li>
+                    <li><strong>Modais:</strong> Adaptáveis a diferentes telas</li>
+                </ul>
+            </div>
+
+            <h3>Geração de PDF</h3>
+            <div class="grid">
+                <div class="card">
+                    <h4>Orçamentos</h4>
+                    <ul>
+                        <li>Layout profissional</li>
+                        <li>Informações do cliente</li>
+                        <li>Tabela de itens</li>
+                        <li>Observações</li>
+                        <li>Dados da empresa</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>Contratos</h4>
+                    <ul>
+                        <li>Cabeçalho formal</li>
+                        <li>Cláusulas numeradas</li>
+                        <li>Quebra automática de página</li>
+                        <li>Espaços para assinaturas</li>
+                        <li>Dados da empresa</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="backend" class="section">
+            <h2>🔧 Plano de Desenvolvimento Backend</h2>
+            
+            <h3>Stack Tecnológica Definida</h3>
+            <div class="grid">
+                <div class="card">
+                    <h4>Backend</h4>
+                    <p><strong>Node.js + Express</strong></p>
+                </div>
+                <div class="card">
+                    <h4>Banco de Dados</h4>
+                    <p><strong>Supabase</strong> (PostgreSQL)</p>
+                </div>
+                <div class="card">
+                    <h4>Storage</h4>
+                    <p><strong>Wasabi</strong> (S3-compatible)</p>
+                </div>
+                <div class="card">
+                    <h4>Autenticação</h4>
+                    <p><strong>Supabase Auth</strong> + JWT</p>
+                </div>
+                <div class="card">
+                    <h4>Upload</h4>
+                    <p><strong>Multer</strong> + Wasabi SDK</p>
+                </div>
+                <div class="card">
+                    <h4>PDF</h4>
+                    <p><strong>Puppeteer</strong> ou jsPDF</p>
+                </div>
+            </div>
+
+            <h3>Configuração Supabase</h3>
+            <div class="code-block">
+// Configuração do Supabase
+const { createClient } = require('@supabase/supabase-js');
+const supabase = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_ANON_KEY
+);
+            </div>
+
+            <h3>Estrutura de Banco de Dados (Supabase)</h3>
+            <h4>Tabelas Principais</h4>
+            <div class="code-block">
+-- Usuários (usando Supabase Auth)
+auth.users (
+  id,
+  email,
+  encrypted_password,
+  email_confirmed_at,
+  created_at,
+  updated_at
+)
+            </div>
+
+            <div class="code-block">
+-- Perfis de usuário
+profiles (
+  id,
+  user_id,
+  name,
+  role,
+  status,
+  created_at,
+  updated_at
+)
+            </div>
+
+            <div class="code-block">
+-- Clientes
+clients (
+  id,
+  name,
+  email,
+  phone,
+  status,
+  manager_id,
+  created_at,
+  updated_at
+)
+            </div>
+
+            <div class="code-block">
+-- Projetos
+projects (
+  id,
+  title,
+  type,
+  client_id,
+  status,
+  responsible_id,
+  due_date,
+  created_at,
+  updated_at
+)
+            </div>
+
+            <div class="code-block">
+-- Jobs
+jobs (
+  id,
+  title,
+  type,
+  status,
+  creator_id,
+  responsible_id,
+  due_date,
+  created_at,
+  updated_at
+)
+            </div>
+
+            <div class="code-block">
+-- Produtos
+products (
+  id,
+  name,
+  category,
+  description,
+  base_price,
+  unit,
+  created_at,
+  updated_at
+)
+            </div>
+
+            <div class="code-block">
+-- Preços por Cliente
+client_prices (
+  id,
+  product_id,
+  client_id,
+  price,
+  created_at,
+  updated_at
+)
+            </div>
+
+            <div class="code-block">
+-- Orçamentos
+quotes (
+  id,
+  number,
+  client_id,
+  status,
+  total,
+  valid_until,
+  created_by,
+  approved_by,
+  created_at,
+  updated_at
+)
+            </div>
+
+            <div class="code-block">
+-- Itens do Orçamento
+quote_items (
+  id,
+  quote_id,
+  product_id,
+  quantity,
+  unit_price,
+  total,
+  created_at
+)
+            </div>
+
+            <div class="code-block">
+-- Contratos
+contracts (
+  id,
+  number,
+  quote_id,
+  client_id,
+  type,
+  status,
+  start_date,
+  end_date,
+  total,
+  created_at,
+  updated_at
+)
+            </div>
+
+            <div class="code-block">
+-- Cláusulas
+contract_clauses (
+  id,
+  contract_id,
+  title,
+  content,
+  order,
+  created_at
+)
+            </div>
+
+            <div class="code-block">
+-- Anexos (referência para Wasabi)
+attachments (
+  id,
+  filename,
+  original_name,
+  mime_type,
+  size,
+  url,
+  entity_type,
+  entity_id,
+  created_at
+)
+            </div>
+
+            <h3>Configuração de Storage (Wasabi)</h3>
+            <div class="code-block">
+// Upload para Wasabi
+const uploadToWasabi = async (file, folder = 'uploads') => {
+  const params = {
+    Bucket: process.env.WASABI_BUCKET,
+    Key: `${folder}/${Date.now()}-${file.originalname}`,
+    Body: file.buffer,
+    ContentType: file.mimetype,
+    ACL: 'public-read'
+  };
+
+  const result = await wasabi.upload(params).promise();
+  return result.Location;
+};
+            </div>
+
+            <div class="code-block">
+// Middleware Multer
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: {
+    fileSize: 10 * 1024 * 1024 // 10MB
+  }
+});
+            </div>
+
+            <h3>APIs Necessárias</h3>
+            
+            <h4>Autenticação (Supabase Auth)</h4>
+            <div class="code-block">
+POST /api/auth/login
+POST /api/auth/logout
+POST /api/auth/refresh
+POST /api/auth/forgot-password
+POST /api/auth/reset-password
+POST /api/auth/signup
+            </div>
+
+            <h4>Usuários</h4>
+            <div class="code-block">
+GET /api/users
+POST /api/users
+GET /api/users/:id
+PUT /api/users/:id
+DELETE /api/users/:id
+GET /api/users/me
+PUT /api/users/me
+            </div>
+
+            <h4>Clientes</h4>
+            <div class="code-block">
+GET /api/clients
+POST /api/clients
+GET /api/clients/:id
+PUT /api/clients/:id
+DELETE /api/clients/:id
+            </div>
+
+            <h4>Projetos</h4>
+            <div class="code-block">
+GET /api/projects
+POST /api/projects
+GET /api/projects/:id
+PUT /api/projects/:id
+DELETE /api/projects/:id
+POST /api/projects/:id/attachments
+DELETE /api/projects/:id/attachments/:attachmentId
+            </div>
+
+            <h4>Jobs</h4>
+            <div class="code-block">
+GET /api/jobs
+POST /api/jobs
+GET /api/jobs/:id
+PUT /api/jobs/:id
+DELETE /api/jobs/:id
+POST /api/jobs/:id/assign
+POST /api/jobs/:id/self-assign
+POST /api/jobs/:id/attachments
+DELETE /api/jobs/:id/attachments/:attachmentId
+            </div>
+
+            <h4>Produtos</h4>
+            <div class="code-block">
+GET /api/products
+POST /api/products
+GET /api/products/:id
+PUT /api/products/:id
+DELETE /api/products/:id
+GET /api/products/:id/client-prices
+PUT /api/products/:id/client-prices
+            </div>
+
+            <h4>Orçamentos</h4>
+            <div class="code-block">
+GET /api/quotes
+POST /api/quotes
+GET /api/quotes/:id
+PUT /api/quotes/:id
+DELETE /api/quotes/:id
+POST /api/quotes/:id/approve
+GET /api/quotes/:id/pdf
+            </div>
+
+            <h4>Contratos</h4>
+            <div class="code-block">
+GET /api/contracts
+POST /api/contracts
+GET /api/contracts/:id
+PUT /api/contracts/:id
+DELETE /api/contracts/:id
+GET /api/contracts/:id/pdf
+            </div>
+
+            <h4>Relatórios</h4>
+            <div class="code-block">
+GET /api/reports/dashboard
+GET /api/reports/projects
+GET /api/reports/clients
+GET /api/reports/users
+GET /api/reports/productivity
+            </div>
+
+            <h4>Upload (Wasabi)</h4>
+            <div class="code-block">
+POST /api/upload
+DELETE /api/upload/:filename
+GET /api/upload/:filename
+            </div>
+
+            <h3>Variáveis de Ambiente</h3>
+            <div class="code-block">
+# Supabase
+SUPABASE_URL=your_supabase_url
+SUPABASE_ANON_KEY=your_supabase_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
+
+# Wasabi
+WASABI_ACCESS_KEY=your_wasabi_access_key
+WASABI_SECRET_KEY=your_wasabi_secret_key
+WASABI_BUCKET=your_bucket_name
+WASABI_REGION=us-east-1
+
+# JWT
+JWT_SECRET=your_jwt_secret
+
+# Server
+PORT=3001
+NODE_ENV=development
+            </div>
+
+            <h3>Dependências Backend</h3>
+            <div class="code-block">
+{
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "helmet": "^7.0.0",
+    "dotenv": "^16.3.1",
+    "@supabase/supabase-js": "^2.38.0",
+    "aws-sdk": "^2.1489.0",
+    "multer": "^1.4.5-lts.1",
+    "jsonwebtoken": "^9.0.2",
+    "bcryptjs": "^2.4.3",
+    "puppeteer": "^21.5.0",
+    "nodemailer": "^6.9.7",
+    "express-rate-limit": "^7.1.5",
+    "express-validator": "^7.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1",
+    "jest": "^29.7.0",
+    "supertest": "^6.3.3"
+  }
+}
+            </div>
+        </section>
+
+        <section id="frontend" class="section">
+            <h2>🔄 Migração Frontend</h2>
+            
+            <h3>Stack Frontend Definida</h3>
+            <div class="grid">
+                <div class="card">
+                    <h4>Framework</h4>
+                    <p><strong>React 18+</strong> com hooks modernos</p>
+                </div>
+                <div class="card">
+                    <h4>Styling</h4>
+                    <p><strong>Tailwind CSS</strong> para design responsivo</p>
+                </div>
+                <div class="card">
+                    <h4>Estado</h4>
+                    <p><strong>React Query</strong> + Context API</p>
+                </div>
+                <div class="card">
+                    <h4>HTTP Client</h4>
+                    <p><strong>Axios</strong> para APIs</p>
+                </div>
+                <div class="card">
+                    <h4>Roteamento</h4>
+                    <p><strong>React Router</strong> v6</p>
+                </div>
+                <div class="card">
+                    <h4>PDF</h4>
+                    <p><strong>jsPDF</strong> para documentos</p>
+                </div>
+            </div>
+            
+            <h3>Passos para Integração</h3>
+            
+            <h4>1. Instalar dependências</h4>
+            <div class="code-block">
+npm install axios react-router-dom @tanstack/react-query
+npm install @supabase/supabase-js
+npm install jspdf
+npm install react-hot-toast
+            </div>
+
+            <h4>2. Configurar Supabase Client</h4>
+            <div class="code-block">
+// src/lib/supabase.js
+import { createClient } from '@supabase/supabase-js';
+
+const supabaseUrl = process.env.REACT_APP_SUPABASE_URL;
+const supabaseAnonKey = process.env.REACT_APP_SUPABASE_ANON_KEY;
+
+export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+            </div>
+
+            <h4>3. Configurar Axios</h4>
+            <div class="code-block">
+// src/services/api.js
+import axios from 'axios';
+
+const api = axios.create({
+  baseURL: process.env.REACT_APP_API_URL || 'http://localhost:3001/api',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+// Interceptor para token
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
+// Interceptor para refresh token
+api.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    if (error.response?.status === 401) {
+      // Refresh token logic
+      const refreshToken = localStorage.getItem('refreshToken');
+      if (refreshToken) {
+        try {
+          const response = await api.post('/auth/refresh', { refreshToken });
+          localStorage.setItem('token', response.data.token);
+          return api.request(error.config);
+        } catch (refreshError) {
+          localStorage.removeItem('token');
+          localStorage.removeItem('refreshToken');
+          window.location.href = '/login';
+        }
+      }
+    }
+    return Promise.reject(error);
+  }
+);
+            </div>
+
+            <h4>4. Context de Autenticação com Supabase</h4>
+            <div class="code-block">
+// src/contexts/AuthContext.js
+import { createContext, useContext, useState, useEffect } from 'react';
+import { supabase } from '../lib/supabase';
+
+const AuthContext = createContext();
+
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Verificar sessão atual
+    const getSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session) {
+        setUser(session.user);
+        setIsAuthenticated(true);
+        localStorage.setItem('token', session.access_token);
+        localStorage.setItem('refreshToken', session.refresh_token);
+      }
+      setLoading(false);
+    };
+
+    getSession();
+
+    // Listener para mudanças de auth
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      async (event, session) => {
+        if (session) {
+          setUser(session.user);
+          setIsAuthenticated(true);
+          localStorage.setItem('token', session.access_token);
+          localStorage.setItem('refreshToken', session.refresh_token);
+        } else {
+          setUser(null);
+          setIsAuthenticated(false);
+          localStorage.removeItem('token');
+          localStorage.removeItem('refreshToken');
+        }
+        setLoading(false);
+      }
+    );
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const login = async (email, password) => {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+    if (error) throw error;
+    return data;
+  };
+
+  const logout = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) throw error;
+  };
+
+  const signup = async (email, password, userData) => {
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: userData
+      }
+    });
+    if (error) throw error;
+    return data;
+  };
+
+  return (
+    <AuthContext.Provider value={{ 
+      user, 
+      isAuthenticated, 
+      loading,
+      login, 
+      logout, 
+      signup 
+    }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
+
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
+};
+            </div>
+
+            <h4>5. Hooks Customizados com React Query</h4>
+            <div class="code-block">
+// src/hooks/useApi.js
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import api from '../services/api';
+
+// Hooks para Projetos
+export const useProjects = () => {
+  return useQuery({
+    queryKey: ['projects'],
+    queryFn: () => api.get('/projects').then(res => res.data),
+  });
+};
+
+export const useCreateProject = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (data) => api.post('/projects', data),
+    onSuccess: () => {
+      queryClient.invalidateQueries(['projects']);
+    },
+  });
+};
+
+export const useUpdateProject = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({ id, data }) => api.put(`/projects/${id}`, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries(['projects']);
+    },
+  });
+};
+
+// Hooks para Clientes
+export const useClients = () => {
+  return useQuery({
+    queryKey: ['clients'],
+    queryFn: () => api.get('/clients').then(res => res.data),
+  });
+};
+
+// Hooks para Jobs
+export const useJobs = () => {
+  return useQuery({
+    queryKey: ['jobs'],
+    queryFn: () => api.get('/jobs').then(res => res.data),
+  });
+};
+
+// Hooks para Orçamentos
+export const useQuotes = () => {
+  return useQuery({
+    queryKey: ['quotes'],
+    queryFn: () => api.get('/quotes').then(res => res.data),
+  });
+};
+
+// Hook para Upload
+export const useUpload = () => {
+  return useMutation({
+    mutationFn: (file) => {
+      const formData = new FormData();
+      formData.append('file', file);
+      return api.post('/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+    },
+  });
+};
+            </div>
+
+            <h4>6. Configuração de Rotas</h4>
+            <div class="code-block">
+// src/App.js
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Toaster } from 'react-hot-toast';
+import { AuthProvider } from './contexts/AuthContext';
+import PrivateRoute from './components/PrivateRoute';
+import Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
+// ... outros imports
+
+const queryClient = new QueryClient();
+
+function App() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <Router>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/" element={
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            } />
+            {/* Outras rotas protegidas */}
+          </Routes>
+        </Router>
+        <Toaster position="top-right" />
+      </AuthProvider>
+    </QueryClientProvider>
+  );
+}
+            </div>
+
+            <h4>7. Variáveis de Ambiente Frontend</h4>
+            <div class="code-block">
+# .env
+REACT_APP_SUPABASE_URL=your_supabase_url
+REACT_APP_SUPABASE_ANON_KEY=your_supabase_anon_key
+REACT_APP_API_URL=http://localhost:3001/api
+REACT_APP_WASABI_BUCKET_URL=https://your-bucket.s3.wasabisys.com
+            </div>
+
+            <h4>8. Dependências Frontend</h4>
+            <div class="code-block">
+{
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.8.0",
+    "@tanstack/react-query": "^4.29.0",
+    "axios": "^1.4.0",
+    "@supabase/supabase-js": "^2.38.0",
+    "jspdf": "^2.5.1",
+    "react-hot-toast": "^2.4.1",
+    "lucide-react": "^0.263.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "tailwindcss": "^3.3.0",
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.24"
+  }
+}
+            </div>
+        </section>
+
+        <section id="checklist" class="section">
+            <h2>✅ Checklist de Implementação</h2>
+            
+            <h3>Setup Inicial (Prioridade Alta)</h3>
+            <ul class="checklist">
+                <li>Configurar projeto Node.js + Express</li>
+                <li>Configurar Supabase (banco de dados)</li>
+                <li>Configurar Wasabi (storage)</li>
+                <li>Configurar projeto React com Tailwind</li>
+                <li>Configurar variáveis de ambiente</li>
+            </ul>
+
+            <h3>Backend (Prioridade Alta)</h3>
+            <ul class="checklist">
+                <li>Setup do projeto Node.js/Express</li>
+                <li>Configuração do Supabase (PostgreSQL)</li>
+                <li>Sistema de autenticação com Supabase Auth</li>
+                <li>Configuração do Wasabi para upload</li>
+                <li>CRUD de usuários com perfis</li>
+                <li>CRUD de clientes</li>
+                <li>CRUD de projetos</li>
+                <li>CRUD de jobs</li>
+                <li>Sistema de upload de arquivos (Wasabi)</li>
+                <li>Geração de PDFs com Puppeteer</li>
+                <li>Middleware de permissões</li>
+                <li>Configuração de CORS e segurança</li>
+            </ul>
+
+            <h3>Frontend (Prioridade Alta)</h3>
+            <ul class="checklist">
+                <li>Configuração do React Query</li>
+                <li>Configuração do Supabase Client</li>
+                <li>Context de autenticação com Supabase</li>
+                <li>Hooks customizados para APIs</li>
+                <li>Integração com backend</li>
+                <li>Tratamento de erros</li>
+                <li>Loading states</li>
+                <li>Validação de formulários</li>
+                <li>Configuração de rotas protegidas</li>
+                <li>Integração com Wasabi para upload</li>
+            </ul>
+
+            <h3>Funcionalidades Específicas</h3>
+            <ul class="checklist">
+                <li>Sistema de notificações com React Hot Toast</li>
+                <li>Filtros e busca</li>
+                <li>Paginação</li>
+                <li>Exportação de dados</li>
+                <li>Assinatura eletrônica</li>
+                <li>Dashboard em tempo real</li>
+                <li>Upload de arquivos para Wasabi</li>
+                <li>Geração de PDFs no frontend</li>
+            </ul>
+
+            <h3>Próximos Passos</h3>
+            <div class="grid">
+                <div class="card">
+                    <h4>1. Setup Supabase</h4>
+                    <p>Criar projeto e configurar tabelas</p>
+                </div>
+                <div class="card">
+                    <h4>2. Setup Wasabi</h4>
+                    <p>Criar bucket e configurar permissões</p>
+                </div>
+                <div class="card">
+                    <h4>3. Criar estrutura do backend</h4>
+                    <p>Node.js + Express + Supabase</p>
+                </div>
+                <div class="card">
+                    <h4>4. Implementar autenticação</h4>
+                    <p>Supabase Auth + JWT</p>
+                </div>
+                <div class="card">
+                    <h4>5. Migrar dados mock</h4>
+                    <p>Para Supabase</p>
+                </div>
+                <div class="card">
+                    <h4>6. Integrar frontend</h4>
+                    <p>React + Supabase + Wasabi</p>
+                </div>
+                <div class="card">
+                    <h4>7. Testar funcionalidades</h4>
+                    <p>Validação completa</p>
+                </div>
+                <div class="card">
+                    <h4>8. Deploy e produção</h4>
+                    <p>Vercel + Railway + Supabase</p>
+                </div>
+            </div>
+
+            <h3>Configurações Necessárias</h3>
+            <div class="grid">
+                <div class="card">
+                    <h4>Supabase</h4>
+                    <ul>
+                        <li>Criar projeto</li>
+                        <li>Configurar tabelas</li>
+                        <li>Configurar RLS (Row Level Security)</li>
+                        <li>Configurar autenticação</li>
+                        <li>Gerar chaves de API</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>Wasabi</h4>
+                    <ul>
+                        <li>Criar conta</li>
+                        <li>Criar bucket</li>
+                        <li>Configurar CORS</li>
+                        <li>Gerar chaves de acesso</li>
+                        <li>Configurar políticas de acesso</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>Backend</h4>
+                    <ul>
+                        <li>Configurar Express</li>
+                        <li>Configurar middleware</li>
+                        <li>Configurar Supabase client</li>
+                        <li>Configurar Wasabi SDK</li>
+                        <li>Configurar autenticação</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>Frontend</h4>
+                    <ul>
+                        <li>Configurar React Query</li>
+                        <li>Configurar Supabase client</li>
+                        <li>Configurar Axios</li>
+                        <li>Configurar rotas</li>
+                        <li>Configurar contexto de auth</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Navegação suave
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            element.scrollIntoView({ behavior: 'smooth' });
+            
+            // Atualizar navegação ativa
+            document.querySelectorAll('.nav a').forEach(link => {
+                link.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        // Botão voltar ao topo
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Mostrar/ocultar botão voltar ao topo
+        window.addEventListener('scroll', () => {
+            const backToTop = document.querySelector('.back-to-top');
+            if (window.scrollY > 300) {
+                backToTop.style.display = 'flex';
+            } else {
+                backToTop.style.display = 'none';
+            }
+        });
+
+        // Navegação ativa baseada no scroll
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('.section');
+            const navLinks = document.querySelectorAll('.nav a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Função para copiar código
+        function copyCode(element) {
+            const text = element.textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                const button = element.nextElementSibling;
+                button.textContent = 'Copiado!';
+                setTimeout(() => {
+                    button.textContent = 'Copiar';
+                }, 2000);
+            });
+        }
+
+        // Adicionar botões de copiar aos blocos de código
+        document.addEventListener('DOMContentLoaded', () => {
+            const codeBlocks = document.querySelectorAll('.code-block');
+            codeBlocks.forEach(block => {
+                const button = document.createElement('button');
+                button.className = 'copy-btn';
+                button.textContent = 'Copiar';
+                button.onclick = () => copyCode(block);
+                block.appendChild(button);
+            });
+        });
+
+        // Progress bar para cada seção
+        function updateProgress() {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                const progress = Math.max(0, Math.min(100, (windowHeight - rect.top) / windowHeight * 100));
+                
+                let progressBar = section.querySelector('.progress-bar');
+                if (!progressBar) {
+                    progressBar = document.createElement('div');
+                    progressBar.className = 'progress-bar';
+                    progressBar.innerHTML = '<div class="progress-fill"></div>';
+                    section.insertBefore(progressBar, section.firstChild);
+                }
+                
+                const progressFill = progressBar.querySelector('.progress-fill');
+                progressFill.style.width = `${progress}%`;
+            });
+        }
+
+        window.addEventListener('scroll', updateProgress);
+        window.addEventListener('resize', updateProgress);
+    </script>
+</body>
+</html> 

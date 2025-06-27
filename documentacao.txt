@@ -1,0 +1,837 @@
+================================================================================
+                           DOCUMENTAÇÃO COMPLETA - AGENCYFLOW
+================================================================================
+
+🎯 VISÃO GERAL DO PROJETO
+================================================================================
+
+O AgencyFlow é um sistema de gestão completo para agências de marketing e publicidade, 
+desenvolvido em React com Tailwind CSS. O sistema oferece controle total sobre projetos, 
+clientes, orçamentos, contratos, jobs e usuários, com sistema de permissões granular.
+
+📊 ESTATÍSTICAS DO PROJETO:
+- Linhas de código: ~3.000 linhas
+- Componentes: 10+ componentes principais
+- Módulos: 9 módulos funcionais
+- Permissões: 20+ permissões granulares
+- Dados mock: 25+ entidades de exemplo
+
+🏗️ ARQUITETURA ATUAL
+================================================================================
+
+STACK TECNOLÓGICA DEFINIDA:
+
+FRONTEND:
+- Framework: React 18+ com hooks modernos
+- Styling: Tailwind CSS para design responsivo
+- Estado: React Query + Context API
+- HTTP Client: Axios para APIs
+- Roteamento: React Router v6
+- PDF: jsPDF para documentos
+
+BACKEND:
+- Runtime: Node.js + Express
+- Banco de Dados: Supabase (PostgreSQL)
+- Storage: Wasabi (S3-compatible)
+- Autenticação: Supabase Auth + JWT
+- Upload: Multer + Wasabi SDK
+- PDF: Puppeteer ou jsPDF
+
+VANTAGENS DA STACK ESCOLHIDA:
+
+Node.js + Express:
+- JavaScript full-stack
+- Ecossistema rico
+- Performance alta
+- Fácil deploy
+
+Supabase:
+- PostgreSQL gerenciado
+- Auth integrado
+- Real-time subscriptions
+- API automática
+
+Wasabi:
+- Storage S3-compatible
+- Baixo custo
+- Alta performance
+- Backup automático
+
+ESTRUTURA DE ARQUIVOS:
+src/
+├── App.js (2.912 linhas - componente principal)
+├── permissions.js (457 linhas - permissões e dados mock)
+├── index.js
+└── index.css
+
+👥 SISTEMA DE USUÁRIOS E PERMISSÕES
+================================================================================
+
+PAPÉIS (ROLES):
+- Admin: Acesso total ao sistema
+- Manager: Gestão de projetos e clientes
+- Designer: Visualização e edição de projetos
+- Motion: Especialista em animação
+- Videomaker: Especialista em vídeo
+- Fotógrafo: Especialista em fotografia
+- Client: Acesso limitado a projetos próprios
+
+PERMISSÕES GRANULARES IMPLEMENTADAS:
+- VIEW_DASHBOARD, CREATE_PROJECTS, EDIT_PROJECTS, DELETE_PROJECTS
+- VIEW_CLIENTS, CREATE_CLIENTS, EDIT_CLIENTS, DELETE_CLIENTS
+- VIEW_USUERS, CREATE_USERS, EDIT_USERS, DELETE_USERS
+- VIEW_JOBS, CREATE_JOBS, EDIT_JOBS, DELETE_JOBS, ASSIGN_JOBS
+- CREATE_QUOTES, VIEW_QUOTES, EDIT_QUOTES, APPROVE_QUOTES
+- CREATE_CONTRACTS, VIEW_CONTRACTS, EDIT_CONTRACTS
+- MANAGE_PRODUCTS, MANAGE_CONTRACT_TEMPLATES
+
+📋 MÓDULOS PRINCIPAIS
+================================================================================
+
+1. DASHBOARD
+Funcionalidades:
+- Cards de estatísticas (clientes, projetos, jobs)
+- Gráfico de projetos por status
+- Projetos ativos em destaque
+- Resumo por empresa/cliente
+- Jobs concluídos, em produção e a produzir
+
+2. PROJETOS
+Funcionalidades:
+- CRUD completo de projetos
+- Tipos: Logo, Vídeo, Foto, Event Coverage, Social Media, Web
+- Status: Novo, Em andamento, Finalizado
+- Atribuição de responsáveis
+- Upload de anexos (roteiros, referências)
+- Formulários específicos por tipo
+
+TIPOS DE PROJETO:
+- Logo: Brand guidelines, paleta de cores, preferências
+- Vídeo: Tipos específicos (VT, Cobertura, Institucional, etc.)
+- Foto: Tipos específicos (Still, Produto, Ambiente, etc.)
+- Event Coverage: Detalhes do evento, tipo de cobertura
+- Social Media: Gestão de redes sociais
+- Web: Desenvolvimento de sites
+
+3. CLIENTES
+Funcionalidades:
+- CRUD completo de clientes
+- Informações de contato
+- Status ativo/inativo
+- Histórico de projetos
+- Receita total por cliente
+- Gerente responsável
+
+4. ORÇAMENTOS
+Funcionalidades:
+- Criação de orçamentos com produtos
+- Preços personalizados por cliente
+- Sistema de aprovação
+- Exportação PDF
+- Validade configurável
+- Observações e notas
+
+PRODUTOS DISPONÍVEIS:
+- Identidade Visual Completa: Logo, cores, tipografia e aplicações
+- Campanha Digital: Gestão de redes sociais por 30 dias
+- Vídeo Institucional: Vídeo de 2-3 minutos com roteiro e produção
+- Fotografia de Produto: Sessão fotográfica com 20 fotos editadas
+- Site Institucional: Site responsivo com até 10 páginas
+- Gestão de Google Ads: Campanha Google Ads com relatórios mensais
+
+5. CONTRATOS
+Funcionalidades:
+- Dois tipos: Serviço Único ou Contrato por Período
+- Cláusulas pré-estabelecidas editáveis
+- Adição/remoção de cláusulas customizadas
+- Exportação PDF profissional
+- Datas de início e fim
+- Espaços para assinaturas
+
+CLÁUSULAS PADRÃO:
+- Objeto do Contrato: Descrição dos serviços a serem prestados
+- Prazo de Execução: Definição dos prazos para entrega
+- Forma de Pagamento: Condições e parcelamento
+- Revisões: Número de revisões incluídas
+- Confidencialidade: Acordo de sigilo
+- Rescisão: Condições para cancelamento
+
+6. JOBS (KANBAN)
+Funcionalidades:
+- CRUD completo de jobs
+- Tipos: Design, Vídeo, Foto, Motion, Web
+- Status: Novo, Em andamento, Pausado, Concluído
+- Atribuição de responsáveis
+- Auto-atribuição
+- Upload de anexos
+- Equipe de trabalho
+
+7. USUÁRIOS
+Funcionalidades:
+- Gestão completa de usuários
+- Atribuição de papéis
+- Status ativo/inativo
+- Histórico de login
+- Permissões granulares
+
+8. RELATÓRIOS
+Funcionalidades:
+- Relatório de Projetos
+- Relatório de Clientes
+- Relatório de Usuários
+- Relatório de Produtividade
+- Exportação de dados
+
+9. CONFIGURAÇÕES
+Funcionalidades:
+- Perfil do usuário
+- Segurança (alteração de senha)
+- Notificações
+- Configurações do sistema
+- Gerenciamento de produtos (admin)
+
+🎨 INTERFACE E UX
+================================================================================
+
+DESIGN SYSTEM:
+- Tema: Dark mode
+- Cores: Gray-950 (background), Gray-900 (cards), Blue-600 (accent)
+- Tipografia: Inter/Sans-serif
+- Componentes: Cards, modais, tabelas, formulários
+
+MENU LATERAL (SIDEBAR):
+- Tipo: Menu sanduíche responsivo
+- Desktop: Fixo, pode ser recolhido (64px)
+- Mobile: Overlay
+- Transições: 300ms suaves
+- Overlay: Em telas pequenas
+
+RESPONSIVIDADE:
+- Mobile-first: Design adaptativo
+- Breakpoints: Tailwind CSS padrão
+- Tabelas: Responsivas sem scroll lateral
+- Modais: Adaptáveis a diferentes telas
+
+GERAÇÃO DE PDF:
+Orçamentos:
+- Layout profissional
+- Informações do cliente
+- Tabela de itens
+- Observações
+- Dados da empresa
+
+Contratos:
+- Cabeçalho formal
+- Cláusulas numeradas
+- Quebra automática de página
+- Espaços para assinaturas
+- Dados da empresa
+
+🔧 PLANO DE DESENVOLVIMENTO BACKEND
+================================================================================
+
+STACK TECNOLÓGICA DEFINIDA:
+- Backend: Node.js + Express
+- Banco de Dados: Supabase (PostgreSQL)
+- Storage: Wasabi (S3-compatible)
+- Autenticação: Supabase Auth + JWT
+- Upload: Multer + Wasabi SDK
+- PDF: Puppeteer ou jsPDF
+
+CONFIGURAÇÃO SUPABASE:
+const { createClient } = require('@supabase/supabase-js');
+
+const supabase = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_ANON_KEY
+);
+
+CONFIGURAÇÃO WASABI:
+const AWS = require('aws-sdk');
+const wasabi = new AWS.S3({
+  endpoint: 's3.wasabisys.com',
+  accessKeyId: process.env.WASABI_ACCESS_KEY,
+  secretAccessKey: process.env.WASABI_SECRET_KEY,
+  region: 'us-east-1'
+});
+
+ESTRUTURA DE BANCO DE DADOS (SUPABASE):
+
+-- Usuários (usando Supabase Auth)
+auth.users (id, email, encrypted_password, email_confirmed_at, created_at, updated_at)
+
+-- Perfis de usuário
+profiles (id, user_id, name, role, status, created_at, updated_at)
+
+-- Clientes
+clients (id, name, email, phone, status, manager_id, created_at, updated_at)
+
+-- Projetos
+projects (id, title, type, client_id, status, responsible_id, due_date, created_at, updated_at)
+
+-- Jobs
+jobs (id, title, type, status, creator_id, responsible_id, due_date, created_at, updated_at)
+
+-- Produtos
+products (id, name, category, description, base_price, unit, created_at, updated_at)
+
+-- Preços por Cliente
+client_prices (id, product_id, client_id, price, created_at, updated_at)
+
+-- Orçamentos
+quotes (id, number, client_id, status, total, valid_until, created_by, approved_by, created_at, updated_at)
+
+-- Itens do Orçamento
+quote_items (id, quote_id, product_id, quantity, unit_price, total, created_at)
+
+-- Contratos
+contracts (id, number, quote_id, client_id, type, status, start_date, end_date, total, created_at, updated_at)
+
+-- Cláusulas
+contract_clauses (id, contract_id, title, content, order, created_at)
+
+-- Anexos (referência para Wasabi)
+attachments (id, filename, original_name, mime_type, size, url, entity_type, entity_id, created_at)
+
+CONFIGURAÇÃO DE STORAGE (WASABI):
+// Upload para Wasabi
+const uploadToWasabi = async (file, folder = 'uploads') => {
+  const params = {
+    Bucket: process.env.WASABI_BUCKET,
+    Key: `${folder}/${Date.now()}-${file.originalname}`,
+    Body: file.buffer,
+    ContentType: file.mimetype,
+    ACL: 'public-read'
+  };
+
+  const result = await wasabi.upload(params).promise();
+  return result.Location;
+};
+
+// Middleware Multer
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: {
+    fileSize: 10 * 1024 * 1024 // 10MB
+  }
+});
+
+APIS NECESSÁRIAS:
+
+Autenticação (Supabase Auth):
+POST /api/auth/login
+POST /api/auth/logout
+POST /api/auth/refresh
+POST /api/auth/forgot-password
+POST /api/auth/reset-password
+POST /api/auth/signup
+
+Usuários:
+GET /api/users
+POST /api/users
+GET /api/users/:id
+PUT /api/users/:id
+DELETE /api/users/:id
+GET /api/users/me
+PUT /api/users/me
+
+Clientes:
+GET /api/clients
+POST /api/clients
+GET /api/clients/:id
+PUT /api/clients/:id
+DELETE /api/clients/:id
+
+Projetos:
+GET /api/projects
+POST /api/projects
+GET /api/projects/:id
+PUT /api/projects/:id
+DELETE /api/projects/:id
+POST /api/projects/:id/attachments
+DELETE /api/projects/:id/attachments/:attachmentId
+
+Jobs:
+GET /api/jobs
+POST /api/jobs
+GET /api/jobs/:id
+PUT /api/jobs/:id
+DELETE /api/jobs/:id
+POST /api/jobs/:id/assign
+POST /api/jobs/:id/self-assign
+POST /api/jobs/:id/attachments
+DELETE /api/jobs/:id/attachments/:attachmentId
+
+Produtos:
+GET /api/products
+POST /api/products
+GET /api/products/:id
+PUT /api/products/:id
+DELETE /api/products/:id
+GET /api/products/:id/client-prices
+PUT /api/products/:id/client-prices
+
+Orçamentos:
+GET /api/quotes
+POST /api/quotes
+GET /api/quotes/:id
+PUT /api/quotes/:id
+DELETE /api/quotes/:id
+POST /api/quotes/:id/approve
+GET /api/quotes/:id/pdf
+
+Contratos:
+GET /api/contracts
+POST /api/contracts
+GET /api/contracts/:id
+PUT /api/contracts/:id
+DELETE /api/contracts/:id
+GET /api/contracts/:id/pdf
+
+Relatórios:
+GET /api/reports/dashboard
+GET /api/reports/projects
+GET /api/reports/clients
+GET /api/reports/users
+GET /api/reports/productivity
+
+Upload (Wasabi):
+POST /api/upload
+DELETE /api/upload/:filename
+GET /api/upload/:filename
+
+VARIÁVEIS DE AMBIENTE:
+# Supabase
+SUPABASE_URL=your_supabase_url
+SUPABASE_ANON_KEY=your_supabase_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
+
+# Wasabi
+WASABI_ACCESS_KEY=your_wasabi_access_key
+WASABI_SECRET_KEY=your_wasabi_secret_key
+WASABI_BUCKET=your_bucket_name
+WASABI_REGION=us-east-1
+
+# JWT
+JWT_SECRET=your_jwt_secret
+
+# Server
+PORT=3001
+NODE_ENV=development
+
+DEPENDÊNCIAS BACKEND:
+{
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "helmet": "^7.0.0",
+    "dotenv": "^16.3.1",
+    "@supabase/supabase-js": "^2.38.0",
+    "aws-sdk": "^2.1489.0",
+    "multer": "^1.4.5-lts.1",
+    "jsonwebtoken": "^9.0.2",
+    "bcryptjs": "^2.4.3",
+    "puppeteer": "^21.5.0",
+    "nodemailer": "^6.9.7",
+    "express-rate-limit": "^7.1.5",
+    "express-validator": "^7.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1",
+    "jest": "^29.7.0",
+    "supertest": "^6.3.3"
+  }
+}
+
+🔄 MIGRAÇÃO FRONTEND
+================================================================================
+
+STACK FRONTEND DEFINIDA:
+- Framework: React 18+ com hooks modernos
+- Styling: Tailwind CSS para design responsivo
+- Estado: React Query + Context API
+- HTTP Client: Axios para APIs
+- Roteamento: React Router v6
+- PDF: jsPDF para documentos
+
+PASSOS PARA INTEGRAÇÃO:
+
+1. Instalar dependências:
+npm install axios react-router-dom @tanstack/react-query
+npm install @supabase/supabase-js
+npm install jspdf
+npm install react-hot-toast
+
+2. Configurar Supabase Client:
+// src/lib/supabase.js
+import { createClient } from '@supabase/supabase-js';
+
+const supabaseUrl = process.env.REACT_APP_SUPABASE_URL;
+const supabaseAnonKey = process.env.REACT_APP_SUPABASE_ANON_KEY;
+
+export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+3. Configurar Axios:
+// src/services/api.js
+import axios from 'axios';
+
+const api = axios.create({
+  baseURL: process.env.REACT_APP_API_URL || 'http://localhost:3001/api',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+// Interceptor para token
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
+// Interceptor para refresh token
+api.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    if (error.response?.status === 401) {
+      // Refresh token logic
+      const refreshToken = localStorage.getItem('refreshToken');
+      if (refreshToken) {
+        try {
+          const response = await api.post('/auth/refresh', { refreshToken });
+          localStorage.setItem('token', response.data.token);
+          return api.request(error.config);
+        } catch (refreshError) {
+          localStorage.removeItem('token');
+          localStorage.removeItem('refreshToken');
+          window.location.href = '/login';
+        }
+      }
+    }
+    return Promise.reject(error);
+  }
+);
+
+4. Context de Autenticação com Supabase:
+// src/contexts/AuthContext.js
+import { createContext, useContext, useState, useEffect } from 'react';
+import { supabase } from '../lib/supabase';
+
+const AuthContext = createContext();
+
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Verificar sessão atual
+    const getSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session) {
+        setUser(session.user);
+        setIsAuthenticated(true);
+        localStorage.setItem('token', session.access_token);
+        localStorage.setItem('refreshToken', session.refresh_token);
+      }
+      setLoading(false);
+    };
+
+    getSession();
+
+    // Listener para mudanças de auth
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      async (event, session) => {
+        if (session) {
+          setUser(session.user);
+          setIsAuthenticated(true);
+          localStorage.setItem('token', session.access_token);
+          localStorage.setItem('refreshToken', session.refresh_token);
+        } else {
+          setUser(null);
+          setIsAuthenticated(false);
+          localStorage.removeItem('token');
+          localStorage.removeItem('refreshToken');
+        }
+        setLoading(false);
+      }
+    );
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const login = async (email, password) => {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+    if (error) throw error;
+    return data;
+  };
+
+  const logout = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) throw error;
+  };
+
+  const signup = async (email, password, userData) => {
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: userData
+      }
+    });
+    if (error) throw error;
+    return data;
+  };
+
+  return (
+    <AuthContext.Provider value={{ 
+      user, 
+      isAuthenticated, 
+      loading,
+      login, 
+      logout, 
+      signup 
+    }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
+
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
+};
+
+5. Hooks Customizados com React Query:
+// src/hooks/useApi.js
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import api from '../services/api';
+
+// Hooks para Projetos
+export const useProjects = () => {
+  return useQuery({
+    queryKey: ['projects'],
+    queryFn: () => api.get('/projects').then(res => res.data),
+  });
+};
+
+export const useCreateProject = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (data) => api.post('/projects', data),
+    onSuccess: () => {
+      queryClient.invalidateQueries(['projects']);
+    },
+  });
+};
+
+export const useUpdateProject = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({ id, data }) => api.put(`/projects/${id}`, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries(['projects']);
+    },
+  });
+};
+
+// Hooks para Clientes
+export const useClients = () => {
+  return useQuery({
+    queryKey: ['clients'],
+    queryFn: () => api.get('/clients').then(res => res.data),
+  });
+};
+
+// Hooks para Jobs
+export const useJobs = () => {
+  return useQuery({
+    queryKey: ['jobs'],
+    queryFn: () => api.get('/jobs').then(res => res.data),
+  });
+};
+
+// Hooks para Orçamentos
+export const useQuotes = () => {
+  return useQuery({
+    queryKey: ['quotes'],
+    queryFn: () => api.get('/quotes').then(res => res.data),
+  });
+};
+
+// Hook para Upload
+export const useUpload = () => {
+  return useMutation({
+    mutationFn: (file) => {
+      const formData = new FormData();
+      formData.append('file', file);
+      return api.post('/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+    },
+  });
+};
+
+6. Configuração de Rotas:
+// src/App.js
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Toaster } from 'react-hot-toast';
+import { AuthProvider } from './contexts/AuthContext';
+import PrivateRoute from './components/PrivateRoute';
+import Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
+// ... outros imports
+
+const queryClient = new QueryClient();
+
+function App() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <Router>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/" element={
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            } />
+            {/* Outras rotas protegidas */}
+          </Routes>
+        </Router>
+        <Toaster position="top-right" />
+      </AuthProvider>
+    </QueryClientProvider>
+  );
+}
+
+7. Variáveis de Ambiente Frontend:
+# .env
+REACT_APP_SUPABASE_URL=your_supabase_url
+REACT_APP_SUPABASE_ANON_KEY=your_supabase_anon_key
+REACT_APP_API_URL=http://localhost:3001/api
+REACT_APP_WASABI_BUCKET_URL=https://your-bucket.s3.wasabisys.com
+
+8. Dependências Frontend:
+{
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.8.0",
+    "@tanstack/react-query": "^4.29.0",
+    "axios": "^1.4.0",
+    "@supabase/supabase-js": "^2.38.0",
+    "jspdf": "^2.5.1",
+    "react-hot-toast": "^2.4.1",
+    "lucide-react": "^0.263.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "tailwindcss": "^3.3.0",
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.24"
+  }
+}
+
+✅ CHECKLIST DE IMPLEMENTAÇÃO
+================================================================================
+
+SETUP INICIAL (Prioridade Alta):
+☐ Configurar projeto Node.js + Express
+☐ Configurar Supabase (banco de dados)
+☐ Configurar Wasabi (storage)
+☐ Configurar projeto React com Tailwind
+☐ Configurar variáveis de ambiente
+
+BACKEND (Prioridade Alta):
+☐ Setup do projeto Node.js/Express
+☐ Configuração do Supabase (PostgreSQL)
+☐ Sistema de autenticação com Supabase Auth
+☐ Configuração do Wasabi para upload
+☐ CRUD de usuários com perfis
+☐ CRUD de clientes
+☐ CRUD de projetos
+☐ CRUD de jobs
+☐ Sistema de upload de arquivos (Wasabi)
+☐ Geração de PDFs com Puppeteer
+☐ Middleware de permissões
+☐ Configuração de CORS e segurança
+
+FRONTEND (Prioridade Alta):
+☐ Configuração do React Query
+☐ Configuração do Supabase Client
+☐ Context de autenticação com Supabase
+☐ Hooks customizados para APIs
+☐ Integração com backend
+☐ Tratamento de erros
+☐ Loading states
+☐ Validação de formulários
+☐ Configuração de rotas protegidas
+☐ Integração com Wasabi para upload
+
+FUNCIONALIDADES ESPECÍFICAS:
+☐ Sistema de notificações com React Hot Toast
+☐ Filtros e busca
+☐ Paginação
+☐ Exportação de dados
+☐ Assinatura eletrônica
+☐ Dashboard em tempo real
+☐ Upload de arquivos para Wasabi
+☐ Geração de PDFs no frontend
+
+PRÓXIMOS PASSOS:
+1. Setup Supabase (Criar projeto e configurar tabelas)
+2. Setup Wasabi (Criar bucket e configurar permissões)
+3. Criar estrutura do backend (Node.js + Express + Supabase)
+4. Implementar autenticação (Supabase Auth + JWT)
+5. Migrar dados mock (Para Supabase)
+6. Integrar frontend (React + Supabase + Wasabi)
+7. Testar funcionalidades (Validação completa)
+8. Deploy e produção (Vercel + Railway + Supabase)
+
+CONFIGURAÇÕES NECESSÁRIAS:
+
+Supabase:
+- Criar projeto
+- Configurar tabelas
+- Configurar RLS (Row Level Security)
+- Configurar autenticação
+- Gerar chaves de API
+
+Wasabi:
+- Criar conta
+- Criar bucket
+- Configurar CORS
+- Gerar chaves de acesso
+- Configurar políticas de acesso
+
+Backend:
+- Configurar Express
+- Configurar middleware
+- Configurar Supabase client
+- Configurar Wasabi SDK
+- Configurar autenticação
+
+Frontend:
+- Configurar React Query
+- Configurar Supabase client
+- Configurar Axios
+- Configurar rotas
+- Configurar contexto de auth
+
+================================================================================
+                            FIM DA DOCUMENTAÇÃO
+================================================================================ 
